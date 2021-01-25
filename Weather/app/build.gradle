@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
+def API_KEY = '"' + ApiKey + '"' ?: '"Api key is not found"'
+def STRING = 'String'
+//def URL1 = '"' + url + '"' ?: '"Api key is not found"'
+//def STRING1 = 'String'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -14,12 +18,19 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        each{type ->
+            type.buildConfigField STRING, 'ApiKey', API_KEY
+  //          type.buildConfigField STRING1, 'url', URL1
+}
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     compileOptions {
